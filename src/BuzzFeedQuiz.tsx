@@ -118,30 +118,36 @@ const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
       selectedAnswers.length > 0 &&
       selectedAnswers.length === questions.length
     ) {
-      const allAnswers = selectedAnswers.map((answer) => answer.resultID);
-      const answerFreq: { [key: string]: number } = {};
-
-      for (let i = 0; i < allAnswers.length; i++) {
-        if (answerFreq[allAnswers[i]]) {
-          answerFreq[allAnswers[i]]++;
-        } else {
-          answerFreq[allAnswers[i]] = 1;
-        }
+      //const allAnswers = selectedAnswers.map((answer) => answer.resultID);
+      //const answerFreq: { [key: string]: number } = {};
+      let name = {};
+      for (let i = 0; i < selectedAnswers.length; i++) {
+          name[selectedAnswer[i].resultID] = selectedAnswer[i].text;
+      }
+      
+      let greekPhilosophyName = "";
+      for (let i = 0; i < selectedAnswers.length; i++) {
+          greekPhilosophyName += name[i];
       }
 
-      const greatestValue = Math.max(...Object.values(answerFreq));
+      //for (let i = 0; i < allAnswers.length; i++) {
+      //  if (answerFreq[allAnswers[i]]) {
+      //    answerFreq[allAnswers[i]]++;
+      //  } else {
+      //    answerFreq[allAnswers[i]] = 1;
+      //  }
+      //}
 
-      const mostFrequentResultID = Object.keys(answerFreq).find(
-        (key) => answerFreq[key] === greatestValue
-      );
+      //const greatestValue = Math.max(...Object.values(answerFreq));
+
+      //const mostFrequentResultID = Object.keys(answerFreq).find(
+      //  (key) => answerFreq[key] === greatestValue
+      //);
+      
 
       if (!resultsAvailable) {
         changeResultsAvailable(true);
-        changeFinalResult(
-          results.filter(
-            (result) => Number(result.resultID) === Number(mostFrequentResultID)
-          )
-        );
+        changeFinalResult({title: greekPhilosophyName, resultID: 0});
       }
     }
   }, [selectedAnswers, questions, resultsAvailable, results]);

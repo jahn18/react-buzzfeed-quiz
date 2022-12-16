@@ -19,6 +19,8 @@ type AnswerType = ImageType & {
    * Otherwise, if no color or invalid color is supplied, the default font color is white.
    */
   fontColor?: string;
+  
+  text?: string;
   /**
    * Function called when this specific answer option is selected.
    * This function value supersedes ReactBuzzFeedQuiz's onAnswerSelection prop, if supplied, for this specific answer choice.
